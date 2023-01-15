@@ -9,6 +9,7 @@ from django.views.generic import CreateView, UpdateView
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, CreateAPIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 
 from advertisements.models import Category, Advertisement, Selection
 from advertisements.permissions import AdvertisementUpdateDeletePermission, SelectionUpdateDeletePermission
@@ -74,7 +75,7 @@ class AdvertisementListView(ListAPIView):
 @method_decorator(csrf_exempt, name="dispatch")
 class AdvertisementCreateView(CreateView):
     """
-    Cоздаёт новую запись таблицы Объявления по id
+    Cоздаёт новую запись таблицы Объявления
     """
     model = Advertisement
     fields = "__all__"
@@ -94,6 +95,11 @@ class AdvertisementCreateView(CreateView):
             is_published=advertisement_data.get("is_published"),
             category=category
         )
+
+        try:
+            advertisement.clean_fields()
+        except ValidationError as e:
+            raise e.message_dict[NON_FIELD_ERRORS]
 
         response_as_dict: Dict[str, int | str] = {
             "id": advertisement.id,
