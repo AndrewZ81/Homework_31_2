@@ -1,7 +1,9 @@
 from django.db.models import Model, CASCADE, CharField, SlugField,\
     PositiveIntegerField, BooleanField, ForeignKey, ManyToManyField, ImageField
 from django.core.validators import MinLengthValidator
+
 from users.models import User
+from advertisements.validators import check_ad_is_published
 
 
 class Category(Model):
@@ -30,7 +32,7 @@ class Advertisement(Model):
     author = ForeignKey(User, on_delete=CASCADE)
     price = PositiveIntegerField()
     description = CharField(null=True, blank=True, max_length=2000)
-    is_published = BooleanField()
+    is_published = BooleanField(validators=[check_ad_is_published])
     image = ImageField(null=True, upload_to="images")
     category = ForeignKey(Category, on_delete=CASCADE)
 
