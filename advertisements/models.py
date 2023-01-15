@@ -26,7 +26,7 @@ class Advertisement(Model):
     def __str__(self):
         return self.name
 
-    name = CharField(max_length=200)
+    name = CharField(null=False, blank=False, max_length=200, validators=[MinLengthValidator(10)])
     author = ForeignKey(User, on_delete=CASCADE)
     price = PositiveIntegerField()
     description = CharField(max_length=2000)
