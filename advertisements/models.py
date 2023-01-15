@@ -1,6 +1,6 @@
-from django.db.models import Model, CASCADE, CharField, \
+from django.db.models import Model, CASCADE, CharField, SlugField,\
     PositiveIntegerField, BooleanField, ForeignKey, ManyToManyField, ImageField
-
+from django.core.validators import MinLengthValidator
 from users.models import User
 
 
@@ -14,6 +14,7 @@ class Category(Model):
         return self.name
 
     name = CharField(max_length=200, unique=True)
+    slug = SlugField(max_length=10, unique=True, validators=[MinLengthValidator(5)])
 
 
 class Advertisement(Model):
