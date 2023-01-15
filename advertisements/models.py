@@ -3,7 +3,7 @@ from django.db.models import Model, CASCADE, CharField, SlugField,\
 from django.core.validators import MinLengthValidator
 
 from users.models import User
-from advertisements.validators import check_ad_is_published
+from advertisements.validators import check_ad_is_published, check_ad_name_length
 
 
 class Category(Model):
@@ -28,12 +28,12 @@ class Advertisement(Model):
     def __str__(self):
         return self.name
 
-    name = CharField(null=False, blank=False, max_length=200, validators=[MinLengthValidator(10)])
+    name = CharField(null=False, blank=False, max_length=200, validators=[check_ad_name_length])
     author = ForeignKey(User, on_delete=CASCADE)
     price = PositiveIntegerField()
     description = CharField(null=True, blank=True, max_length=2000)
     is_published = BooleanField(validators=[check_ad_is_published])
-    image = ImageField(null=True, upload_to="images")
+    image = ImageField(null=True, blank=True, upload_to="images")
     category = ForeignKey(Category, on_delete=CASCADE)
 
 
