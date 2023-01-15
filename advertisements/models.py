@@ -29,7 +29,7 @@ class Advertisement(Model):
     name = CharField(null=False, blank=False, max_length=200, validators=[MinLengthValidator(10)])
     author = ForeignKey(User, on_delete=CASCADE)
     price = PositiveIntegerField()
-    description = CharField(max_length=2000)
+    description = CharField(null=True, blank=True, max_length=2000)
     is_published = BooleanField()
     image = ImageField(null=True, upload_to="images")
     category = ForeignKey(Category, on_delete=CASCADE)
