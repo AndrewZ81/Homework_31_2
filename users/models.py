@@ -1,7 +1,8 @@
 from django.db.models import Model, CharField, ManyToManyField, \
-    PositiveSmallIntegerField, DecimalField, DateField, TextChoices
+    PositiveSmallIntegerField, DecimalField, DateField, EmailField, TextChoices
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 
 from users.validators import check_user_age
 
@@ -42,4 +43,9 @@ class User(AbstractUser):
     role = CharField(max_length=9, choices=UserRole.choices)
     age = PositiveSmallIntegerField(null=True)
     location = ManyToManyField(Location)
-    birth_date = DateField(null=True, validators=[check_user_age])
+    birth_date = DateField(validators=[check_user_age])
+    email = EmailField(unique=True, validators=[RegexValidator(
+        regex="@rambler.ru",
+        inverse_match=True,
+        message="Регистрация с домена 'rambler.ru' запрещена"
+    )])
