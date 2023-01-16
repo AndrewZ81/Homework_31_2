@@ -1,5 +1,5 @@
 import datetime
-from dateutil import relativedelta
+from dateutil.relativedelta import relativedelta
 from rest_framework.serializers import ValidationError
 
 
