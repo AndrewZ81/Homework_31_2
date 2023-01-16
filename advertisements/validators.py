@@ -1,4 +1,4 @@
-from rest_framework.serializers import ValidationError
+from django.core.exceptions import ValidationError
 
 
 def check_ad_is_published(value: bool):

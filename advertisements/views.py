@@ -99,7 +99,7 @@ class AdvertisementCreateView(CreateView):
         try:
             advertisement.clean_fields()
         except ValidationError as e:
-            raise e.message_dict[NON_FIELD_ERRORS]
+            raise e
 
         response_as_dict: Dict[str, int | str] = {
             "id": advertisement.id,
