@@ -1,8 +1,9 @@
 from django.db.models import Model, CharField, ManyToManyField, \
-    PositiveSmallIntegerField, DecimalField, TextChoices
-
+    PositiveSmallIntegerField, DecimalField, DateField, TextChoices
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
+
+from users.validators import check_user_age
 
 
 class Location(Model):
@@ -41,3 +42,4 @@ class User(AbstractUser):
     role = CharField(max_length=9, choices=UserRole.choices)
     age = PositiveSmallIntegerField(null=True)
     location = ManyToManyField(Location)
+    birth_date = DateField(null=True, validators=[check_user_age])
