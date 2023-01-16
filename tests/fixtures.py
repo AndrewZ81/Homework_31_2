@@ -4,7 +4,7 @@ from advertisements.models import User
 
 @pytest.fixture
 @pytest.mark.django_db
-def create_access_token(client, django_user_model: User):
+def access_token(client, django_user_model: User):
     """
     Создаёт токен доступа
     """
