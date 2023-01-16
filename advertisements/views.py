@@ -96,6 +96,10 @@ class AdvertisementCreateView(CreateView):
             category=category
         )
 
+        """
+        Запускаем валидацию полей модели 'Advertisement' принудительно,
+        т.к мы не используем валидацию в сериализаторе
+        """
         try:
             advertisement.clean_fields()
         except ValidationError as e:
