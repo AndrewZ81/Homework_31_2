@@ -9,7 +9,7 @@ from django.views.generic import CreateView, UpdateView
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, CreateAPIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
+from django.core.exceptions import ValidationError
 
 from advertisements.models import Category, Advertisement, Selection
 from advertisements.permissions import AdvertisementUpdateDeletePermission, SelectionUpdateDeletePermission
