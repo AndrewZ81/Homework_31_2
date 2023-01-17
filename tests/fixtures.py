@@ -17,9 +17,9 @@ def access_token(client, django_user_model: User):
     django_user_model.objects.create_user(
         username=username,
         password=password,
-        #role=role,
+        role=role,
         email=email,
-        #birth_date=birth_date
+        birth_date=birth_date
     )
     response = client.post(
         "/user/token/",
