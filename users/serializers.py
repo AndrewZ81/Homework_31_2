@@ -85,4 +85,4 @@ class LocationViewSetSerializer(ModelSerializer):
 
     class Meta:
         model = Location
-        fields = "__all__"
+        exclude = ["id"]

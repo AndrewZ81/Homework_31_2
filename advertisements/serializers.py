@@ -10,7 +10,7 @@ class CategoryViewSetSerializer(ModelSerializer):
 
     class Meta:
         model = Category
-        fields = "__all__"
+        exclude = ["id"]
 
 
 class AdvertisementListViewSerializer(ModelSerializer):
