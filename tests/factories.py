@@ -3,7 +3,16 @@ from factory.django import DjangoModelFactory
 from factory import Faker
 
 from advertisements.models import Advertisement, Category
-from users.models import User
+from users.models import User, Location
+
+
+class LocationFactory(DjangoModelFactory):
+    class Meta:
+        model = Location
+
+    name = Faker("name")
+    lat = "12.345678"
+    lng = "12.345678"
 
 
 class UserFactory(DjangoModelFactory):
